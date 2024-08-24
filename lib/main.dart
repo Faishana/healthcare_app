@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/welcomeScreen.dart';
 
-//Main method
 void main() {
   runApp(MyApp());
 }
