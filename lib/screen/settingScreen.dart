@@ -1,6 +1,11 @@
 // ignore: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/profileScreens/aboutUs.dart';
+import 'package:healthcare_app/screen/profileScreens/genaral.dart';
+import 'package:healthcare_app/screen/profileScreens/notification.dart';
+import 'package:healthcare_app/screen/profileScreens/profile.dart';
+import 'package:healthcare_app/screen/welcomeScreen.dart';
 
 // ignore: camel_case_types
 class settingScreen extends StatelessWidget {
@@ -39,7 +44,13 @@ class settingScreen extends StatelessWidget {
             ),
             const Divider(height: 50),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const profile(),
+                          ));
+              },
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
@@ -63,7 +74,13 @@ class settingScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const notification(),
+                          ));
+              },
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
@@ -85,33 +102,16 @@ class settingScreen extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
+            
             const SizedBox(height: 20),
             ListTile(
-              onTap: () {},
-              leading: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                ),
-                child: const Icon(
-                  Icons.privacy_tip_outlined,
-                  color: Colors.blue,
-                  size: 35,
-                ),
-              ),
-              title: const Text(
-                "Privacy",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              trailing: const Icon(Icons.arrow_forward_ios_rounded),
-            ),
-            const SizedBox(height: 20),
-            ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const genaral(),
+                          ));
+              },
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
@@ -135,7 +135,13 @@ class settingScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                  Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const aboutUs(),
+                          ));
+              },
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
@@ -160,7 +166,13 @@ class settingScreen extends StatelessWidget {
             const SizedBox(height: 20),
             const Divider(height: 30),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const welcomeScreen(),
+                          ));
+              },
               leading: Container(
                 padding: const EdgeInsets.all(10),
                 decoration: const BoxDecoration(
