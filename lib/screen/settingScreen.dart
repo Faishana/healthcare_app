@@ -8,9 +8,14 @@ import 'package:healthcare_app/screen/profileScreens/profile.dart';
 import 'package:healthcare_app/screen/welcomeScreen.dart';
 
 // ignore: camel_case_types
-class settingScreen extends StatelessWidget {
+class settingScreen extends StatefulWidget {
   const settingScreen({super.key});
 
+  @override
+  State<settingScreen> createState() => _settingScreenState();
+}
+
+class _settingScreenState extends State<settingScreen> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -48,7 +53,7 @@ class settingScreen extends StatelessWidget {
                 Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const profile(),
+                            builder: (context) => profile(),
                           ));
               },
               leading: Container(
@@ -168,10 +173,11 @@ class settingScreen extends StatelessWidget {
             ListTile(
               onTap: () {
                 Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const welcomeScreen(),
-                          ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => welcomeScreen(), // Remove 'const' here
+                  ),
+                );
               },
               leading: Container(
                 padding: const EdgeInsets.all(10),
@@ -194,6 +200,7 @@ class settingScreen extends StatelessWidget {
               ),
               trailing: const Icon(Icons.arrow_forward_ios_rounded),
             ),
+
             const SizedBox(height: 20),
           ],
         ),
