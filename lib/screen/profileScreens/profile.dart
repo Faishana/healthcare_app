@@ -30,18 +30,42 @@ class profile extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),),
             ),
-            SizedBox(height: 15,),
-            Container(
-              
-              width: 150,
-              height: 150,
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(image: AssetImage("images/doctor1.jpg"),
-                fit: BoxFit.contain,
-                
+            const SizedBox(height: 15,),
+            Center(
+              child: Stack(
+                children: [
+                  Container(
+                  
+                  width: 150,
+                  height: 150,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(image: AssetImage("images/doctor1.jpg"),
+                    fit: BoxFit.contain,
+                    
+                  ),
+                ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      width: 4,
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                    ),
+                    color: Colors.blue,
+                  ),
+                  child: const Icon(
+                    Icons.edit,
+                  ),
+                ))
+                ] 
               ),
-            ),
             ),
           ],
         ),
