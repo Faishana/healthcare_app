@@ -61,7 +61,6 @@ class ListVeiw extends StatelessWidget {
   }
 
   Widget message(int index){
-    double textSize = 14;
     return Container(
       child: RichText(
         maxLines: 3,
