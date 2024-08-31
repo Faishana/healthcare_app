@@ -23,7 +23,7 @@ class _profileState extends State<profile> {
         ),
         ),
                
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(255, 148, 187, 207),
 
       ),
       body: Container(
