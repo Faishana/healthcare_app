@@ -114,7 +114,7 @@ class _settingScreenState extends State<settingScreen> {
                 Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const genaral(),
+                            builder: (context) => genaral(),
                           ));
               },
               leading: Container(
