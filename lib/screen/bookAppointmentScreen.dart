@@ -18,6 +18,21 @@ class bookAppointmentScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      body: Container(
+        
+        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: const Text(
+          
+          "Good Health Care Centre",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+          //textAlign: TextAlign.center,
+        ),
+      )
+      
     );
   }
 }
