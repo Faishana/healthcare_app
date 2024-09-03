@@ -2,6 +2,7 @@
 
 import 'package:healthcare_app/screen/appointmentScreen.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class homeScreen extends StatelessWidget {
@@ -47,7 +48,9 @@ class homeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  bookAppointmentScreen();
+                },
                 child: Container(
                   padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(

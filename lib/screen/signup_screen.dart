@@ -1,3 +1,4 @@
+import 'package:healthcare_app/screen/homeScreen.dart';
 import 'package:healthcare_app/screen/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -90,11 +91,11 @@ class _signupScreenState extends State<signupScreen> {
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => loginScreen(),
-                        //     ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => homeScreen(),
+                            ));
                       },
                       child: const Padding(
                         padding:

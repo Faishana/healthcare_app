@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class appointmentScreen extends StatelessWidget {
@@ -336,10 +337,16 @@ class appointmentScreen extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => bookAppointmentScreen(),
+                            ));
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.symmetric(vertical: 18),
+                padding: const EdgeInsets.symmetric(vertical: 13),
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 117, 102, 248),
                   borderRadius: BorderRadius.circular(10),
