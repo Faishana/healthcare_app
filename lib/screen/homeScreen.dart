@@ -6,13 +6,16 @@ import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class homeScreen extends StatelessWidget {
-  List symptoms = ["Temperature", "Snuffle", "Fever", "Cold", "abc"];
+ // List symptoms = ["Temperature", "Snuffle", "Fever", "Cold", "abc"];
 
   List images = [
     "doctor1.jpg",
     "doctor2.jpg",
     "doctor3.jpg",
     "doctor4.jpg",
+    "doctor5.jpg",
+    "doctor6.jpg",
+    "doctor7.jpg",
   ];
 
   homeScreen({super.key});
@@ -38,7 +41,7 @@ class homeScreen extends StatelessWidget {
                 ),
                 CircleAvatar(
                   radius: 25,
-                  backgroundImage: AssetImage("images/doctor1.jpg"),
+                  backgroundImage: AssetImage("images/heart.png"),
                 )
               ],
             ),
@@ -141,53 +144,8 @@ class homeScreen extends StatelessWidget {
               ),
             ],
           ),
+          
           const SizedBox(height: 25),
-          const Padding(
-            padding: EdgeInsets.only(left: 15),
-            child: Text(
-              "What is the symptoms you have?",
-              style: TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w500,
-                color: Colors.black54,
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 70,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: symptoms.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          blurRadius: 4,
-                          spreadRadius: 2,
-                        )
-                      ]),
-                  child: Center(
-                    child: Text(
-                      symptoms[index],
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 15),
           const Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text(
@@ -203,7 +161,7 @@ class homeScreen extends StatelessWidget {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
             ),
-            itemCount: 4,
+            itemCount: 7,
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (BuildContext context, int index) {

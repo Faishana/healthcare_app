@@ -11,6 +11,9 @@ class appointmentScreen extends StatelessWidget {
     "doctor2.jpg",
     "doctor3.jpg",
     "doctor4.jpg",
+    "doctor5.jpg",
+    "doctor6.jpg",
+    "doctor7.jpg",
   ];
 
   appointmentScreen({super.key});
@@ -265,36 +268,7 @@ class appointmentScreen extends StatelessWidget {
                         );
                       },
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Location",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: Color.fromARGB(255, 231, 191, 191),
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Icon(
-                        Icons.location_on,
-                        color: Color.fromARGB(255, 117, 102, 248),
-                        size: 30,
-                      ),
-                    ),
-                    title: const Text(
-                      "Suwa Sahana - Anuradhapura",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: const Text("address line of SS-A"),
-                  ),
+                  ),   
                 ],
               ),
             ),
@@ -316,26 +290,8 @@ class appointmentScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Consltation price",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  "\$100",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 15),
+            
+           // const SizedBox(height: 15),
             InkWell(
               onTap: () {
                 Navigator.push(
