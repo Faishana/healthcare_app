@@ -49,7 +49,7 @@ class homeScreen extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  const bookAppointmentScreen();
+                   bookAppointmentScreen();
                 },
                 child: Container(
                   padding: const EdgeInsets.all(20),
