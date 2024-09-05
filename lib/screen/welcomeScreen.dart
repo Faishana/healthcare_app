@@ -1,7 +1,6 @@
 // ignore: file_names
 // ignore: file_names
 import 'package:healthcare_app/screen/login_screen.dart';
-import 'package:healthcare_app/screen/signup_screen.dart';
 import 'package:healthcare_app/widgets/navbarRootScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -83,32 +82,7 @@ class welcomeScreen extends StatelessWidget {
                       padding:
                           EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                       child: Text(
-                        "Login",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Material(
-                  color: const Color.fromARGB(255, 8, 119, 211),
-                  borderRadius: BorderRadius.circular(10),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const signupScreen(),
-                          ));
-                    },
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                      child: Text(
-                        "Sign Up",
+                        "Sign in",
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22,

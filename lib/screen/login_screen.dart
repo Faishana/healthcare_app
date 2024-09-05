@@ -81,7 +81,7 @@ class _loginScreenState extends State<loginScreen> {
                           EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                       child: Center(
                         child: Text(
-                          "Login",
+                          "Sign in",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 25,
@@ -115,7 +115,7 @@ class _loginScreenState extends State<loginScreen> {
                         ));
                   },
                   child: const Text(
-                    "Create an account",
+                    "Sign Up",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
