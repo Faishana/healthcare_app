@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "68333325352",
+    "project_id": "healthfis",
+    "storage_bucket": "healthfis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:68333325352:android:eeb1247d7475d65e3ff91d",
+        "android_client_info": {
+          "package_name": "com.heal.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEoXLdTEIyDbRG316PiE52ixwxIt_Cj-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
