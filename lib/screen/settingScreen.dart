@@ -5,7 +5,6 @@ import 'package:healthcare_app/screen/profileScreens/aboutUs.dart';
 import 'package:healthcare_app/screen/profileScreens/genaral.dart';
 import 'package:healthcare_app/screen/profileScreens/notification.dart';
 import 'package:healthcare_app/screen/profileScreens/profile.dart';
-import 'package:healthcare_app/screen/welcomeScreen.dart';
 
 // ignore: camel_case_types
 class settingScreen extends StatefulWidget {
@@ -172,12 +171,12 @@ class _settingScreenState extends State<settingScreen> {
             const Divider(height: 30),
             ListTile(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => welcomeScreen(), // Remove 'const' here
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => welcomeScreen(), // Remove 'const' here
+                //   ),
+                // );
               },
               leading: Container(
                 padding: const EdgeInsets.all(10),
