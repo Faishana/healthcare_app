@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
 import 'package:healthcare_app/screen/homeScreen.dart';
 import 'package:healthcare_app/screen/signup_screen.dart';
 
@@ -11,6 +12,14 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
+
+  final Authentication _auth = Authentication();
+
+  final _formKey = GlobalKey<FormState>();
+
+  String email = "";
+  String password = "";
+
   bool passToggle = true;
   
   @override
@@ -19,26 +28,44 @@ class _loginScreenState extends State<loginScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Column(
+            
             children: [
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(20),
                 child: Image.asset("images/doctors.png"),
               ),
-              const SizedBox(height: 10),
-              const Padding(
-                padding: EdgeInsets.all(12),
-                child: TextField(
-                  decoration: InputDecoration(
+              const SizedBox(height: 10,),
+              Padding(
+                key: _formKey,
+                padding: const EdgeInsets.all(12),
+                child: TextFormField(
+                  validator: (value) => value?.isEmpty == true ? "Enter a valied email" : null,
+                  onChanged: (value){
+                    setState(() {
+                      email = value;
+                    });
+                  },
+
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    label: Text("Enter Username"),
+                    label: Text("Enter email"),
                     prefixIcon: Icon(Icons.person),
                   ),
+                  //controller: _email,
                 ),
               ),
               Padding(
+                key: _formKey,
                 padding: const EdgeInsets.all(12),
-                child: TextField(
+                child: TextFormField(
+                  validator: (value) => value!.length < 6? "Enter a valied password" : null,
+                  onChanged: (value){
+                    setState(() {
+                      password = value;
+                    });
+                  },
+
                   obscureText: passToggle ? true : false,
                   decoration: InputDecoration(
                     border: const OutlineInputBorder(),
@@ -55,10 +82,12 @@ class _loginScreenState extends State<loginScreen> {
                           : const Icon(CupertinoIcons.eye_fill),
                     ),
                   ),
+                 // controller: _password,
                 ),
               ),
               const SizedBox(height: 20),
               Padding(
+                key: _formKey,
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
                   width: double.infinity,
@@ -103,11 +132,12 @@ class _loginScreenState extends State<loginScreen> {
                     ),
                   ),
                   TextButton(
+                    key: _formKey,
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const signupScreen(),
+                          builder: (context) => const SignupScreen(),
                         ),
                       );
                     },

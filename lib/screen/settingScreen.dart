@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
 import 'package:healthcare_app/screen/profileScreens/aboutUs.dart';
 import 'package:healthcare_app/screen/profileScreens/genaral.dart';
 import 'package:healthcare_app/screen/profileScreens/notification.dart';
@@ -15,6 +16,8 @@ class settingScreen extends StatefulWidget {
 }
 
 class _settingScreenState extends State<settingScreen> {
+
+  final Authentication _auth = Authentication();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -170,13 +173,8 @@ class _settingScreenState extends State<settingScreen> {
             const SizedBox(height: 20),
             const Divider(height: 30),
             ListTile(
-              onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => welcomeScreen(), // Remove 'const' here
-                //   ),
-                // );
+              onTap: () async {
+                await _auth.signOut();
               },
               leading: Container(
                 padding: const EdgeInsets.all(10),

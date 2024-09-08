@@ -1,11 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'firebase_options.dart';
-import 'package:healthcare_app/SplashScreen.dart';
+import 'package:healthcare_app/screen/connectionScreens/models/userModel.dart';
+import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
+import 'package:healthcare_app/screen/connectionScreens/wrapper.dart';
+import 'package:healthcare_app/screen/signup_screen.dart';
+import 'package:provider/provider.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -14,9 +17,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return StreamProvider<UserModel?>.value(initialData: UserModel(uid: ""), value: Authentication().user,
+    child: const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(), // Set SplashScreen as the home screen
-    );
+        home: SignupScreen(), 
+      ),
+      );
   }
 }

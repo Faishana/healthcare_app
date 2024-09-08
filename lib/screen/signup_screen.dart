@@ -1,17 +1,26 @@
-import 'package:healthcare_app/screen/homeScreen.dart';
-import 'package:healthcare_app/screen/login_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
+import 'package:healthcare_app/screen/homeScreen.dart'; 
+import 'package:healthcare_app/screen/login_screen.dart'; 
 
-class signupScreen extends StatefulWidget {
-  const signupScreen({super.key});
+class SignupScreen extends StatefulWidget {
+  const SignupScreen({super.key});
 
   @override
-  State<signupScreen> createState() => _signupScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _signupScreenState extends State<signupScreen> {
+class _SignupScreenState extends State<SignupScreen> {
+
+  final Authentication _auth = Authentication(); 
+
+  String email = "";
+  String password = "";
+  String error = "";
+
   bool passToggle = true;
+
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -23,103 +32,88 @@ class _signupScreenState extends State<signupScreen> {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.asset("images/doctors.png"),
+                child: Image.asset("images/doctors.png",
+                height: 200,),
               ),
               const SizedBox(height: 15),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: "Full Name",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextField(
-                  decoration: InputDecoration(
+            
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                child: TextFormField(
+                  validator: (value) => value?.isEmpty == true ? "Enter a valied email" : null,
+                  onChanged: (value){
+                    setState(() {
+                      email = value;
+                    });
+                  },
+                  decoration: const InputDecoration(
                     labelText: "Email Address",
                     border: OutlineInputBorder(),
                     prefixIcon: Icon(Icons.email),
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextField(
-                  decoration: InputDecoration(
-                    labelText: "Phone Number",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.phone),
-                  ),
-                ),
-              ),
+              
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextField(
-                  obscureText: passToggle ? true : false,
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                child: TextFormField(
+                  validator: (value) => value!.length < 6? "Enter a valied password" : null,
+                  onChanged: (value){
+                    setState(() {
+                      password = value;
+                    });
+                  },
+                  
+                  obscureText: passToggle,
                   decoration: InputDecoration(
-                    labelText: "password",
+                    labelText: "Password",
                     border: const OutlineInputBorder(),
-                    prefixIcon: const Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.lock),
                     suffixIcon: InkWell(
                       onTap: () {
-                        if (passToggle == true) {
-                          passToggle = false;
-                        } else {
-                          passToggle = true;
-                        }
-                        setState(() {});
+                        setState(() {
+                          passToggle = !passToggle; // Toggle the password visibility
+                        });
                       },
-                      child: passToggle
-                          ? const Icon(CupertinoIcons.eye_slash_fill)
-                          : const Icon(CupertinoIcons.eye_fill),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Material(
-                    color: const Color.fromARGB(255, 8, 119, 211),
-                    borderRadius: BorderRadius.circular(10),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => homeScreen(),
-                            ));
-                      },
-                      child: const Padding(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                        child: Center(
-                          child: Text(
-                            "Create an Account",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
+                      child: Icon(
+                        passToggle ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
                       ),
                     ),
                   ),
                 ),
               ),
+              //const Text("Enter a valied email!", 
+              // style: TextStyle(
+              //   color: Colors.red,
+                
+              // ),),
+              const SizedBox(
+                height: 20,
+              ),
+              const Padding(padding: EdgeInsets.symmetric(),
+              child:  Text("Login with you social account!",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 4, 60, 106),
+                  ),
+               ),              
+              ),
+              GestureDetector(
+                onTap: () {
+                  
+                },
+                child: Padding(padding: const EdgeInsets.all(0),
+                child: Image.asset("images/google.jpg",
+                 height: 60,),
+                ),
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Already have an account..?",
+                    "Already have an account?",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -127,12 +121,13 @@ class _signupScreenState extends State<signupScreen> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const loginScreen(),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const loginScreen(), 
+                        ),
+                      );
                     },
                     child: const Text(
                       "Login",
@@ -142,9 +137,49 @@ class _signupScreenState extends State<signupScreen> {
                         color: Color.fromARGB(255, 8, 119, 211),
                       ),
                     ),
-                  )
+                  ),
                 ],
-              )
+              ),
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Material(
+                    color: const Color.fromARGB(255, 8, 119, 211),
+                    borderRadius: BorderRadius.circular(15),
+                    child: GestureDetector(
+                      onTap: () async{
+                        dynamic result = await _auth.registreWithEmailPassword(email, password);
+
+                        if(result == null){
+                          setState(() {
+                            error = "Please fillout the feilds!";
+                          });
+                        }
+                        // else{
+                        //   passToggle = homeScreen() as bool;
+                        // }
+                      },
+                      child: const InkWell(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                          child: Center(
+                            child: Text(
+                              "Create an Account",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
