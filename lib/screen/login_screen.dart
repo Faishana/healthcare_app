@@ -15,10 +15,11 @@ class _loginScreenState extends State<loginScreen> {
 
   final Authentication _auth = Authentication();
 
-  final _formKey = GlobalKey<FormState>();
+  //final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
+  String error ="";
 
   bool passToggle = true;
   
@@ -32,12 +33,12 @@ class _loginScreenState extends State<loginScreen> {
             children: [
               const SizedBox(height: 10),
               Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(25),
                 child: Image.asset("images/doctors.png"),
               ),
               const SizedBox(height: 10,),
               Padding(
-                key: _formKey,
+                //key: _formKey,
                 padding: const EdgeInsets.all(12),
                 child: TextFormField(
                   validator: (value) => value?.isEmpty == true ? "Enter a valied email" : null,
@@ -56,7 +57,7 @@ class _loginScreenState extends State<loginScreen> {
                 ),
               ),
               Padding(
-                key: _formKey,
+                //key: _formKey,
                 padding: const EdgeInsets.all(12),
                 child: TextFormField(
                   validator: (value) => value!.length < 6? "Enter a valied password" : null,
@@ -85,9 +86,11 @@ class _loginScreenState extends State<loginScreen> {
                  // controller: _password,
                 ),
               ),
-              const SizedBox(height: 20),
+              Text(error,
+              style: const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
+
               Padding(
-                key: _formKey,
+                //key: _formKey,
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
                   width: double.infinity,
@@ -95,13 +98,22 @@ class _loginScreenState extends State<loginScreen> {
                     color: const Color.fromARGB(255, 8, 119, 211),
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
-                      onTap: () {
-                        Navigator.push(
+                      onTap: () async {
+                        dynamic result =  await _auth.signinWithEmailPassword(email, password);
+
+                        if(result == null){
+                          setState(() {
+                            error = "Couldn't signin to your account!";
+                          });
+                        }
+                        else{
+                          Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => homeScreen(),
+                            builder: (context) => homeScreen(), 
                           ),
                         );
+                        }
                       },
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
@@ -132,7 +144,7 @@ class _loginScreenState extends State<loginScreen> {
                     ),
                   ),
                   TextButton(
-                    key: _formKey,
+                   // key: _formKey,
                     onPressed: () {
                       Navigator.push(
                         context,

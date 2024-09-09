@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:healthcare_app/screen/homeScreen.dart';
 import 'package:healthcare_app/screen/messageScreen.dart';
 import 'package:healthcare_app/screen/scheduleScreen.dart';
@@ -16,8 +15,8 @@ class navbarRootScreen extends StatefulWidget {
 
 // ignore: camel_case_types
 class _navbarRootScreenState extends State<navbarRootScreen> {
-  int selectIndex = 0;
-  final screens = [
+  int _selectIndex = 0;
+  final _screens = [
     //Home Screen
     homeScreen(),
     //Messages Screen
@@ -32,8 +31,8 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: screens[selectIndex],
-      bottomNavigationBar: SizedBox(
+      body: _screens[_selectIndex],
+      bottomNavigationBar: Container(
         height: 80,
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
@@ -44,10 +43,10 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
-          currentIndex: selectIndex,
+          currentIndex: _selectIndex,
           onTap: (index) {
             setState(() {
-              selectIndex = index;
+              _selectIndex = index;
             });
           },
           items: const [

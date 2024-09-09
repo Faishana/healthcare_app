@@ -12,6 +12,20 @@ class Authentication {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
+      return _userWithFirebaseUid(user);
+    } catch (error) {
+      print(error.toString());
+      return null;
+    }
+  }
+
+  Future signinWithEmailPassword(String email, String password) async {
+    try {
+      
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
+      User? user = result.user;
+      return _userWithFirebaseUid(user);
+
     } catch (error) {
       print(error.toString());
       return null;

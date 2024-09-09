@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
-import 'package:healthcare_app/screen/homeScreen.dart'; 
-import 'package:healthcare_app/screen/login_screen.dart'; 
+import 'package:healthcare_app/screen/homeScreen.dart';
+import 'package:healthcare_app/screen/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -12,8 +12,7 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
-  final Authentication _auth = Authentication(); 
+  final Authentication _auth = Authentication();
 
   String email = "";
   String password = "";
@@ -32,16 +31,17 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.all(10),
-                child: Image.asset("images/doctors.png",
-                height: 200,),
+                child: Image.asset(
+                  "images/doctors.png",
+                  height: 200,
+                ),
               ),
               const SizedBox(height: 15),
-            
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
-                  validator: (value) => value?.isEmpty == true ? "Enter a valied email" : null,
-                  onChanged: (value){
+                  validator: (value) => value?.isEmpty == true ? "Enter a valid email" : null,
+                  onChanged: (value) {
                     setState(() {
                       email = value;
                     });
@@ -53,17 +53,15 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
-                  validator: (value) => value!.length < 6? "Enter a valied password" : null,
-                  onChanged: (value){
+                  validator: (value) => value!.length < 6 ? "Enter a valid password" : null,
+                  onChanged: (value) {
                     setState(() {
                       password = value;
                     });
                   },
-                  
                   obscureText: passToggle,
                   decoration: InputDecoration(
                     labelText: "Password",
@@ -72,7 +70,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     suffixIcon: InkWell(
                       onTap: () {
                         setState(() {
-                          passToggle = !passToggle; // Toggle the password visibility
+                          passToggle = !passToggle; 
                         });
                       },
                       child: Icon(
@@ -82,33 +80,37 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              //const Text("Enter a valied email!", 
-              // style: TextStyle(
-              //   color: Colors.red,
-                
-              // ),),
-              const SizedBox(
-                height: 20,
+              Text(
+                error,
+                style: const TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              const Padding(padding: EdgeInsets.symmetric(),
-              child:  Text("Login with you social account!",
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(),
+                child: Text(
+                  "Login with your social account!",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                     color: Color.fromARGB(255, 4, 60, 106),
                   ),
-               ),              
+                ),
               ),
               GestureDetector(
                 onTap: () {
-                  
+                  // Handle Google Sign-in here
                 },
-                child: Padding(padding: const EdgeInsets.all(0),
-                child: Image.asset("images/google.jpg",
-                 height: 60,),
+                child: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Image.asset(
+                    "images/google.jpg",
+                    height: 60,
+                  ),
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -125,7 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const loginScreen(), 
+                          builder: (context) => const loginScreen(),
                         ),
                       );
                     },
@@ -148,30 +150,31 @@ class _SignupScreenState extends State<SignupScreen> {
                   child: Material(
                     color: const Color.fromARGB(255, 8, 119, 211),
                     borderRadius: BorderRadius.circular(15),
-                    child: GestureDetector(
-                      onTap: () async{
-                        dynamic result = await _auth.registreWithEmailPassword(email, password);
+                    child: InkWell(
+                      onTap: () async {
+                        dynamic result = await _auth.registreWithEmailPassword(email, password); // Corrected method name
 
-                        if(result == null){
+                        if (result == null) {
                           setState(() {
-                            error = "Please fillout the feilds!";
+                            error = "Could not register with those credentials.";
                           });
+                        } else {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => homeScreen(),                             ),
+                          );
                         }
-                        // else{
-                        //   passToggle = homeScreen() as bool;
-                        // }
                       },
-                      child: const InkWell(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                          child: Center(
-                            child: Text(
-                              "Create an Account",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        child: Center(
+                          child: Text(
+                            "Create an Account",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

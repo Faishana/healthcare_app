@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/appointmentScreen.dart';
 import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
+import 'package:healthcare_app/widgets/navbarRootScreen.dart';
+
+void main() {
+  runApp(const MaterialApp(
+    home: navbarRootScreen(),
+  ));
+}
 
 class homeScreen extends StatelessWidget {
-  List images = [
+  final List<String> images = [
     "doctor1.jpg",
     "doctor2.jpg",
     "doctor3.jpg",
@@ -17,7 +24,7 @@ class homeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold( // Ensure Scaffold is the root of the homeScreen
+    return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.only(top: 40),
         child: Column(
@@ -55,7 +62,7 @@ class homeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Material( // Wrap the container in Material widget
+                  child: Material(
                     color: Colors.transparent,
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -106,7 +113,7 @@ class homeScreen extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {},
-                  child: Material( // Wrap the container in Material widget
+                  child: Material(
                     color: Colors.transparent,
                     child: Container(
                       padding: const EdgeInsets.all(20),
@@ -187,7 +194,7 @@ class homeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Material( // Wrap each grid item in Material widget
+                  child: Material(
                     color: Colors.transparent,
                     child: Container(
                       margin: const EdgeInsets.all(10),
@@ -246,7 +253,7 @@ class homeScreen extends StatelessWidget {
                   ),
                 );
               },
-            )
+            ),
           ],
         ),
       ),
