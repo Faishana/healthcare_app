@@ -42,20 +42,21 @@ class _profileState extends State<profile> {
                     
                     width: 150,
                     height: 150,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(image: AssetImage("images/doctor1.jpg"),
-                      fit: BoxFit.contain,
+                  //   decoration: const BoxDecoration(
+                  //     shape: BoxShape.circle,
+                  //     image: DecorationImage(image: AssetImage("images/doctor1.jpg"),
+                  //     fit: BoxFit.contain,
+                  //     ),
                       
-                    ),
-                  ),
+                  // ),
+                  child: const Icon(Icons.person, size: 100, color: Color.fromARGB(255, 4, 60, 106),),
                   ),
                   Positioned(
                     bottom: 0,
                     right: 0,
                     child: Container(
-                    height: 45,
-                    width: 45,
+                    height: 40,
+                    width: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -67,6 +68,7 @@ class _profileState extends State<profile> {
                     child: const Icon(
                       Icons.edit,
                     ),
+                    
                   ),
                 ),
               ] ,
@@ -74,9 +76,9 @@ class _profileState extends State<profile> {
               ),
               const SizedBox(height: 10,),
 
-              UserDetails("NIC Number : ", "xxxxxxxxxxx", false),
               UserDetails("Full Name : ", "Faizana rafeesh", false),
               UserDetails("Address : ", "Kekirawa/ Galnewa", false),
+              UserDetails("Email : ", "abc@123", false),
               UserDetails("Password : ", "**************", true),
             
             const SizedBox(height: 20,),

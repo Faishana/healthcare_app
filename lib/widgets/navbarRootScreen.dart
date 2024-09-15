@@ -15,8 +15,8 @@ class navbarRootScreen extends StatefulWidget {
 
 // ignore: camel_case_types
 class _navbarRootScreenState extends State<navbarRootScreen> {
-  int _selectIndex = 0;
-  final _screens = [
+  int selectIndex = 0;
+  final screens = [
     //Home Screen
     homeScreen(),
     //Messages Screen
@@ -31,8 +31,8 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: _screens[_selectIndex],
-      bottomNavigationBar: Container(
+      body: screens[selectIndex],
+      bottomNavigationBar: SizedBox(
         height: 80,
         child: BottomNavigationBar(
           backgroundColor: Colors.white,
@@ -43,10 +43,10 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),
-          currentIndex: _selectIndex,
+          currentIndex: selectIndex,
           onTap: (index) {
             setState(() {
-              _selectIndex = index;
+              selectIndex = index;
             });
           },
           items: const [

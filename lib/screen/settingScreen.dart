@@ -71,7 +71,7 @@ class _settingScreenState extends State<settingScreen> {
                 ),
               ),
               title: const Text(
-                "profile",
+                "Edit Profile",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,

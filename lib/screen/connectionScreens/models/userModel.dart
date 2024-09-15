@@ -2,5 +2,8 @@
 
 class UserModel{
   final String uid;
-  UserModel({required this.uid});
+
+  const UserModel({
+    required this.uid
+  });
 }

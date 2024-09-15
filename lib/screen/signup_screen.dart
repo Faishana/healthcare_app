@@ -14,8 +14,10 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final Authentication _auth = Authentication();
 
+  String fullName ="";
   String email = "";
   String password = "";
+  String location = "";
   String error = "";
 
   bool passToggle = true;
@@ -37,6 +39,16 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Full Name",
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
@@ -77,6 +89,16 @@ class _SignupScreenState extends State<SignupScreen> {
                         passToggle ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
                       ),
                     ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: "Address location",
+                    border: OutlineInputBorder(),
+                    prefixIcon: Icon(Icons.location_on),
                   ),
                 ),
               ),
@@ -152,7 +174,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     borderRadius: BorderRadius.circular(15),
                     child: InkWell(
                       onTap: () async {
-                        dynamic result = await _auth.registreWithEmailPassword(email, password); // Corrected method name
+                        dynamic result = await _auth.registerWithEmailPassword(
+                          fullName, email, password, location); // Using Firestore method
 
                         if (result == null) {
                           setState(() {
@@ -162,7 +185,8 @@ class _SignupScreenState extends State<SignupScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => homeScreen(),                             ),
+                              builder: (context) => homeScreen(),
+                            ),
                           );
                         }
                       },

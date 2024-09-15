@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/connectionScreens/models/userModel.dart';
 import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
 import 'package:healthcare_app/screen/connectionScreens/wrapper.dart';
-import 'package:healthcare_app/screen/login_screen.dart';
-import 'package:healthcare_app/screen/signup_screen.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -21,7 +19,7 @@ class MyApp extends StatelessWidget {
     return StreamProvider<UserModel?>.value(initialData: UserModel(uid: ""), value: Authentication().user,
     child: const MaterialApp(
       debugShowCheckedModeBanner: false,
-        home: loginScreen(), 
+        home: Wrapper(), 
       ),
       );
   }
