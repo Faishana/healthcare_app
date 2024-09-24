@@ -24,7 +24,7 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
     //Schedule screen
     const scheduleScreen(),
     //Sttengs Screen
-    const settingScreen(),
+    settingScreen(email: '',),
   ];
 
   @override

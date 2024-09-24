@@ -1,16 +1,34 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:healthcare_app/screen/appointmentScreen.dart';
 
 // ignore: camel_case_types
 class bookAppointmentScreen extends StatefulWidget {
   bookAppointmentScreen({super.key});
+
+  final fNameController = TextEditingController();
+  final addressController = TextEditingController();
+  final illenessController = TextEditingController();
 
   @override
   State<bookAppointmentScreen> createState() => _bookAppointmentScreenState();
 }
 
 class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
+
   TextEditingController _dateTimeController = TextEditingController();
-  TextEditingController _timeController = TextEditingController(); // Controller for time
+  TextEditingController _timeController = TextEditingController(); 
+
+  @override
+  void dispose() {
+    widget.fNameController.dispose();
+    widget.addressController.dispose();
+    _dateTimeController.dispose();
+    _timeController.dispose();
+    widget.illenessController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,120 +43,126 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 7),
-          Container(
-            height: 70,
-            width: 500,
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: const Text(
-              "Good Health Care Centre",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: Colors.blue,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 7),
+            Container(
+              height: 70,
+              width: 500,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+              child: const Text(
+                "Good Health Care Centre",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  color: Colors.blue,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(height: 5),
-          const Padding(
-            padding: EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: "Enter your full name : ",
-                labelStyle: TextStyle(
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: TextField(
+                controller: widget.fNameController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your full name : ",
+                  labelStyle: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                  prefixIcon: Icon(Icons.person),
+                ),
+                
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: TextField(
+                controller: widget.addressController,
+                decoration: const InputDecoration(
+                  labelText: "Enter your address : ",
+                  labelStyle: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
-                    fontWeight: FontWeight.bold),
-                prefixIcon: Icon(Icons.person),
-              ),
-            ),
-          ),
-          const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: "Enter your address : ",
-                labelStyle: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  prefixIcon: Icon(Icons.location_on),
                 ),
-                prefixIcon: Icon(Icons.location_on),
+                cursorHeight: 40,
               ),
-              cursorHeight: 40,
             ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              controller: _dateTimeController,
-              decoration: const InputDecoration(
-                labelText: "Select your appointment date : ",
-                labelStyle: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: TextField(
+                controller: _dateTimeController,
+                decoration: const InputDecoration(
+                  labelText: "Select your appointment date : ",
+                  labelStyle: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  prefixIcon: Icon(Icons.calendar_month_rounded),
                 ),
-                prefixIcon: Icon(Icons.calendar_month_rounded),
+                readOnly: true,
+                onTap: () {
+                  _selectDate(context);
+                },
               ),
-              readOnly: true,
-              onTap: () {
-                _selectDate(context);
-              },
             ),
-          ),
-          const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              controller: _timeController, // Add the controller for time
-              decoration: const InputDecoration(
-                labelText: "Select appointment time : ",
-                labelStyle: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: TextField(
+                controller: _timeController, 
+                decoration: const InputDecoration(
+                  labelText: "Select appointment time : ",
+                  labelStyle: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  prefixIcon: Icon(Icons.access_time_rounded), 
                 ),
-                prefixIcon: Icon(Icons.access_time_rounded), // Time icon
+                readOnly: true,
+                onTap: () {
+                  _selectTime(context); 
+                },
               ),
-              readOnly: true,
-              onTap: () {
-                _selectTime(context); // Call the time picker method
-              },
             ),
-          ),
-          const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.only(top: 5, left: 20, right: 20),
-            child: TextField(
-              decoration: InputDecoration(
-                labelText: "Mention your illness : ",
-                labelStyle: TextStyle(
-                  fontSize: 15,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+              child: TextField(
+                controller: widget.illenessController,
+                decoration: const InputDecoration(
+                  labelText: "Mention your illness : ",
+                  labelStyle: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  prefixIcon: Icon(Icons.medical_information_outlined),
                 ),
-                prefixIcon: Icon(Icons.medical_information_outlined),
               ),
             ),
-          ),
-          const SizedBox(height: 20,),
-          const Text("Your healthcare, simplified. Anytime, anywhere",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-            color: Colors.red,
-          ),
-          textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 10,),
-          Buttons(),
-        ],
+            const SizedBox(height: 18,),
+            const Text("Your healthcare, simplified. Anytime, anywhere",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
+              color: Colors.red,
+            ),
+            textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10,),
+            Buttons(),
+          ],
+        ),
       ),
 
       
@@ -157,7 +181,13 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => appointmentScreen(),
+                            ));
+                  },
                   child: const Text(
                     "CANCEL",
                     style: TextStyle(
@@ -179,7 +209,21 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     backgroundColor: const Color.fromARGB(255, 54, 161, 249),
                   ),
-                  onPressed: (){},
+                  onPressed: () {
+                    CollectionReference colRef = FirebaseFirestore.instance.collection('Appointment_details');
+                    colRef.add({
+                      'FullName': widget.fNameController.text,
+                      'Address': widget.addressController.text,
+                      'Date': _dateTimeController.text,
+                      'Time': _timeController.text,
+                      'Illness': widget.illenessController.text, 
+                    }).then((value) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Appointment added successfully!')));
+                    }).catchError((error) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to add appointment: $error')));
+                    });
+                  },
+
                   child: const Text(
                     "ADD",
                     style: TextStyle(

@@ -9,13 +9,18 @@ import 'package:healthcare_app/screen/profileScreens/profile.dart';
 
 // ignore: camel_case_types
 class settingScreen extends StatefulWidget {
-  const settingScreen({super.key});
+
+  String email;
+
+  settingScreen({required this.email});
 
   @override
   State<settingScreen> createState() => _settingScreenState();
 }
 
 class _settingScreenState extends State<settingScreen> {
+
+
 
   final Authentication _auth = Authentication();
   @override
@@ -36,18 +41,18 @@ class _settingScreenState extends State<settingScreen> {
               ),
             ),
             const SizedBox(height: 30),
-            const ListTile(
-              leading: CircleAvatar(
+            ListTile(
+              leading: const CircleAvatar(
                 backgroundImage: AssetImage("images/doctor1.jpg"),
               ),
               title: Text(
-                "Dr. Doctor name",
-                style: TextStyle(
+                ' ${widget.email}', 
+                style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              subtitle: Text("Profile"),
+              subtitle: const Text("Profile"),
             ),
             const Divider(height: 50),
             ListTile(

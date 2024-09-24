@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
 import 'package:healthcare_app/screen/homeScreen.dart';
 import 'package:healthcare_app/screen/login_screen.dart';
+import 'package:healthcare_app/screen/settingScreen.dart';
 
 class SignupScreen extends StatefulWidget {
+
+
   const SignupScreen({super.key});
 
   @override
@@ -12,12 +15,13 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+
+  TextEditingController _email = new TextEditingController();
+
   final Authentication _auth = Authentication();
 
-  String fullName ="";
   String email = "";
   String password = "";
-  String location = "";
   String error = "";
 
   bool passToggle = true;
@@ -39,16 +43,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "Full Name",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
@@ -89,16 +83,6 @@ class _SignupScreenState extends State<SignupScreen> {
                         passToggle ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
                       ),
                     ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: "Address location",
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.location_on),
                   ),
                 ),
               ),
@@ -174,8 +158,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     borderRadius: BorderRadius.circular(15),
                     child: InkWell(
                       onTap: () async {
-                        dynamic result = await _auth.registerWithEmailPassword(
-                          fullName, email, password, location); // Using Firestore method
+                        dynamic result = await _auth.registerWithEmailPassword(email, password); // Corrected method name
 
                         if (result == null) {
                           setState(() {
@@ -187,9 +170,11 @@ class _SignupScreenState extends State<SignupScreen> {
                             MaterialPageRoute(
                               builder: (context) => homeScreen(),
                             ),
+                            result: Navigator.of(context).push(MaterialPageRoute(builder: (context)=> settingScreen(email: _email.text),),),
                           );
                         }
                       },
+
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         child: Center(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
 import 'package:healthcare_app/screen/homeScreen.dart';
+import 'package:healthcare_app/screen/settingScreen.dart';
 import 'package:healthcare_app/screen/signup_screen.dart';
 
 class loginScreen extends StatefulWidget {
@@ -13,9 +14,9 @@ class loginScreen extends StatefulWidget {
 
 class _loginScreenState extends State<loginScreen> {
 
-  final Authentication _auth = Authentication();
+  TextEditingController _email = new TextEditingController();
 
-  //final _formKey = GlobalKey<FormState>();
+  final Authentication _auth = Authentication();
 
   String email = "";
   String password = "";
@@ -99,22 +100,27 @@ class _loginScreenState extends State<loginScreen> {
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
                       onTap: () async {
-                        dynamic result =  await _auth.signinWithEmailPassword(email, password);
+                        dynamic result = await _auth.signinWithEmailPassword(email, password);
 
-                        if(result == null){
+                        if (result == null) {
                           setState(() {
-                            error = "Couldn't signin to your account!";
+                            error = "Couldn't sign in to your account!";
                           });
-                        }
-                        else{
+                        } else {
                           Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => homeScreen(), 
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => homeScreen(),
+                            ),
+                            result: Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => settingScreen(email: email), 
+                              ),
+                            ),
+                          );
                         }
                       },
+
                       child: const Padding(
                         padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                         child: Center(
