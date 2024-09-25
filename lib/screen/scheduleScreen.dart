@@ -12,10 +12,12 @@ class scheduleScreen extends StatefulWidget {
 }
 
 class _scheduleScreenState extends State<scheduleScreen> {
+  
   int buttonIndex = 0;
   final scheduleWidgets = [
     //Upcomming widget
-    const upcomingScreen(), //Complete widget
+    const upcomingScreen(), 
+    //Complete widget
     Container(),
     //Cancelled widget
     Container(),

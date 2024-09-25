@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/appointmentScreen.dart';
 import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
+import 'package:healthcare_app/screen/chatScreen.dart';
+import 'package:healthcare_app/screen/doctor.dart';
+import 'package:healthcare_app/screen/messageScreen.dart';
+import 'package:healthcare_app/widgets/chatSample.dart';
 import 'package:healthcare_app/widgets/navbarRootScreen.dart';
 
 void main() {
@@ -18,6 +22,36 @@ class homeScreen extends StatelessWidget {
     "doctor5.png",
     "doctor6.jpg",
     "doctor7.jpg",
+  ];
+
+  final List<String> doctorNames = [
+    "Dr. Akshana",
+    "Dr. Jane Smith",
+    "Dr. Emily Davis",
+    "Dr. Ravichandran",
+    "Dr. Naleef",
+    "Dr. Samras",
+    "Dr. Chamara",
+  ];
+
+  final List<String> specialties = [
+    "Cardiologist",
+    "Therapist",
+    "Nuro surgon",
+    "VOG",
+    "Dentist",
+    "VP",
+    "Surgon",
+  ];
+
+  final List<double> ratings = [
+    4.9,
+    4.8,
+    4.7,
+    4.6,
+    4.3,
+    4.8,
+    4.5,
   ];
 
   homeScreen({super.key});
@@ -112,7 +146,14 @@ class homeScreen extends StatelessWidget {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => chatScreen(),
+                      ),
+                    );
+                  },
                   child: Material(
                     color: Colors.transparent,
                     child: Container(
@@ -181,7 +222,7 @@ class homeScreen extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
               ),
-              itemCount: 7,
+              itemCount: images.length,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (BuildContext context, int index) {
@@ -191,8 +232,17 @@ class homeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => appointmentScreen(),
+                        settings: RouteSettings(
+                          arguments: Doctor(
+                            name: doctorNames[index],
+                            specialty: specialties[index],
+                            image: images[index],
+                            rating: ratings[index],
+                          ), // Pass the doctor object
+                        ),
                       ),
                     );
+
                   },
                   child: Material(
                     color: Colors.transparent,
@@ -217,31 +267,31 @@ class homeScreen extends StatelessWidget {
                             radius: 35,
                             backgroundImage: AssetImage("images/${images[index]}"),
                           ),
-                          const Text(
-                            "Dr. Doctor name",
-                            style: TextStyle(
+                          Text(
+                            doctorNames[index], 
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                               color: Colors.black,
                             ),
                           ),
-                          const Text(
-                            "Therapist",
-                            style: TextStyle(
+                           Text(
+                            specialties[index], 
+                            style:const TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          const Row(
+                           Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 Icons.star,
                                 color: Color.fromARGB(255, 4, 172, 10),
                               ),
                               Text(
-                                "4.9",
-                                style: TextStyle(
+                                ratings[index].toString(),
+                                style: const TextStyle(
                                   color: Colors.black,
                                 ),
                               ),

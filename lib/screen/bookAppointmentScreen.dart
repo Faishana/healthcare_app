@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:healthcare_app/screen/appointmentScreen.dart';
+import 'package:healthcare_app/screen/doctor.dart';
+import 'package:healthcare_app/screen/homeScreen.dart';
 
 // ignore: camel_case_types
 class bookAppointmentScreen extends StatefulWidget {
@@ -169,12 +171,12 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
     );
   }
 
-  Row Buttons() {
-    return Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                margin: const EdgeInsets.only(left: 30), // Set the desired margin here
+                Row Buttons() {
+                  return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                margin: const EdgeInsets.only(left: 30), 
                 child: OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     elevation: 2,
@@ -182,11 +184,13 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                   ),
                   onPressed: () {
+                    // Ensure you pass the Doctor object here
                     Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => appointmentScreen(),
-                            ));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => homeScreen(),           
+                        ),
+                    );
                   },
                   child: const Text(
                     "CANCEL",
@@ -197,6 +201,7 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
                   ),
                 ),
               ),
+
               
               const SizedBox(width: 50,),
               

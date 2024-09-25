@@ -24,11 +24,12 @@ class chatScreen extends StatelessWidget {
                   backgroundImage: AssetImage("images/doctor1.jpg"),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 15),
+                  padding: EdgeInsets.only(left: 10),
                   child: Text(
                     "Mr. Doctor name",
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
                 ),

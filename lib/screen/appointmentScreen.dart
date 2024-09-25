@@ -3,31 +3,53 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthcare_app/screen/bookAppointmentScreen.dart';
+import 'doctor.dart';
 
 // ignore: must_be_immutable, camel_case_types
 class appointmentScreen extends StatelessWidget {
-  List images = [
-    "doctor1.jpg",
-    "doctor2.jpg",
-    "doctor3.jpg",
-    "doctor4.jpg",
-    "doctor5.jpg",
-    "doctor6.jpg",
-    "doctor7.jpg",
-  ];
-
   appointmentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> images = [
+    "doctor1.jpg",
+    "doctor2.jpg",
+    "doctor3.jpg",
+    "doctor4.jpg",
+    "doctor5.png",
+    "doctor6.jpg",
+    "doctor7.jpg",
+  ];
+
+  final List<String> doctorNames = [
+    "Dr. Akshana",
+    "Dr. Jane Smith",
+    "Dr. Emily Davis",
+    "Dr. Ravichandran",
+    "Dr. Naleef",
+    "Dr. Samras",
+    "Dr. Chamara",
+  ];
+
+  final List<double> ratings = [
+    4.9,
+    4.8,
+    4.7,
+    4.6,
+    4.3,
+    4.8,
+    4.5,
+  ];
+
+    final Doctor doctor = ModalRoute.of(context)!.settings.arguments as Doctor;
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 8, 119, 211),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 50),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Stack(
@@ -62,23 +84,23 @@ class appointmentScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 35,
-                          backgroundImage: AssetImage("images/doctor1.jpg"),
+                          backgroundImage: AssetImage("images/${doctor.image}"), 
                         ),
                         const SizedBox(height: 15),
-                        const Text(
-                          "Dr. Doctor name",
-                          style: TextStyle(
+                        Text(
+                          doctor.name, // Use doctor name
+                          style: const TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.w500,
                             color: Colors.white,
                           ),
                         ),
                         const SizedBox(height: 5),
-                        const Text(
-                          "Therapist",
-                          style: TextStyle(
+                        Text(
+                          doctor.specialty, // Use doctor specialty
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
@@ -136,16 +158,18 @@ class appointmentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  const Text(
-                    "About doctor",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+                  const Center(
+                    child: const Text(
+                      "About doctor",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "*********************",
+                    "*********************", 
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.black,
@@ -166,22 +190,14 @@ class appointmentScreen extends StatelessWidget {
                         Icons.star,
                         color: Color.fromARGB(255, 4, 172, 10),
                       ),
-                      const Text(
-                        "4.9",
-                        style: TextStyle(
+                      Text(
+                        doctor.rating.toString(), // Use doctor rating
+                        style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const SizedBox(width: 5),
-                      const Text(
-                        "123",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Color.fromARGB(255, 117, 102, 248),
-                        ),
-                      ),
+                      
                       const Spacer(),
                       TextButton(
                         onPressed: () {},
@@ -200,7 +216,7 @@ class appointmentScreen extends StatelessWidget {
                     height: 160,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 4,
+                      itemCount: 7,
                       itemBuilder: (context, index) {
                         return Container(
                           margin: const EdgeInsets.all(10),
@@ -223,32 +239,32 @@ class appointmentScreen extends StatelessWidget {
                                 ListTile(
                                   leading: CircleAvatar(
                                     radius: 25,
-                                    backgroundImage:
-                                        AssetImage("images/${images[index]}"),
+                                     backgroundImage: AssetImage("images/${images[index]}"),
                                   ),
-                                  title: const Text(
-                                    "Dr. Docotor name",
-                                    style: TextStyle(
+                                  title: Text(
+                                    doctorNames[index], 
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   subtitle: const Text("1 day ago"),
-                                  trailing: const Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min, 
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.star,
                                         color: Color.fromARGB(255, 4, 172, 10),
                                       ),
+                                      const SizedBox(width: 5), 
                                       Text(
-                                        "4.9",
-                                        style: TextStyle(
+                                        ratings[index].toString(), 
+                                        style: const TextStyle(
                                           color: Colors.black,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
+
                                 ),
                                 const SizedBox(height: 5),
                                 const Padding(
@@ -256,7 +272,7 @@ class appointmentScreen extends StatelessWidget {
                                   child: Text(
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
-                                    "ugugheuhd uhbde ihdihdi tfsvjx lkjhidh",
+                                    "Good health Strong Life", 
                                     style: TextStyle(
                                       color: Colors.black,
                                     ),
@@ -268,7 +284,7 @@ class appointmentScreen extends StatelessWidget {
                         );
                       },
                     ),
-                  ),   
+                  ),
                 ],
               ),
             ),
@@ -290,15 +306,14 @@ class appointmentScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            
-           // const SizedBox(height: 15),
             InkWell(
               onTap: () {
                 Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => bookAppointmentScreen(),
-                            ));
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => bookAppointmentScreen(),
+                  ),
+                );
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
