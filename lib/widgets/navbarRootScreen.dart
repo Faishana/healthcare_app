@@ -18,13 +18,13 @@ class _navbarRootScreenState extends State<navbarRootScreen> {
   int selectIndex = 0;
   final screens = [
     //Home Screen
-    homeScreen(),
+    homeScreen(name: '',),
     //Messages Screen
     messageScreen(),
     //Schedule screen
     const scheduleScreen(),
     //Sttengs Screen
-    settingScreen(email: '',),
+    settingScreen(name: '', email: '',),
   ];
 
   @override

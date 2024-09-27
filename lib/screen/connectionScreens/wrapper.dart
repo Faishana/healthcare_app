@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthcare_app/SplashScreen.dart';
 import 'package:healthcare_app/screen/connectionScreens/models/userModel.dart';
 import 'package:healthcare_app/screen/signup_screen.dart';
 import 'package:healthcare_app/widgets/navbarRootScreen.dart';
@@ -12,7 +13,7 @@ class Wrapper extends StatelessWidget {
 
     final user = Provider.of<UserModel?>(context);
     if(user == null){
-      return const SignupScreen();
+      return const SplashScreen();
     }
     else{
       return const navbarRootScreen();

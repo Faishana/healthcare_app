@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:healthcare_app/screen/connectionScreens/models/userModel_signUp.dart';
 import 'package:healthcare_app/screen/connectionScreens/services/auth.dart';
+import 'package:healthcare_app/screen/connectionScreens/services/userReposatory.dart';
 import 'package:healthcare_app/screen/homeScreen.dart';
 import 'package:healthcare_app/screen/login_screen.dart';
-import 'package:healthcare_app/screen/settingScreen.dart';
 
 class SignupScreen extends StatefulWidget {
-
-
   const SignupScreen({super.key});
 
   @override
@@ -15,10 +15,11 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
-  TextEditingController _email = new TextEditingController();
+  TextEditingController _email = TextEditingController();
+  TextEditingController _password = TextEditingController(); 
 
   final Authentication _auth = Authentication();
+  final UserRepository _userRepo = Get.put(UserRepository()); 
 
   String email = "";
   String password = "";
@@ -46,12 +47,9 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
-                  validator: (value) => value?.isEmpty == true ? "Enter a valid email" : null,
-                  onChanged: (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  },
+                  controller: _email, // Use the email controller
+                  validator: (value) =>
+                      value?.isEmpty == true ? "Enter a valid email" : null,
                   decoration: const InputDecoration(
                     labelText: "Email Address",
                     border: OutlineInputBorder(),
@@ -62,12 +60,9 @@ class _SignupScreenState extends State<SignupScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
                 child: TextFormField(
-                  validator: (value) => value!.length < 6 ? "Enter a valid password" : null,
-                  onChanged: (value) {
-                    setState(() {
-                      password = value;
-                    });
-                  },
+                  controller: _password, // Use the password controller
+                  validator: (value) =>
+                      value!.length < 6 ? "Enter a valid password" : null,
                   obscureText: passToggle,
                   decoration: InputDecoration(
                     labelText: "Password",
@@ -76,11 +71,13 @@ class _SignupScreenState extends State<SignupScreen> {
                     suffixIcon: InkWell(
                       onTap: () {
                         setState(() {
-                          passToggle = !passToggle; 
+                          passToggle = !passToggle;
                         });
                       },
                       child: Icon(
-                        passToggle ? CupertinoIcons.eye_slash_fill : CupertinoIcons.eye_fill,
+                        passToggle
+                            ? CupertinoIcons.eye_slash_fill
+                            : CupertinoIcons.eye_fill,
                       ),
                     ),
                   ),
@@ -158,25 +155,37 @@ class _SignupScreenState extends State<SignupScreen> {
                     borderRadius: BorderRadius.circular(15),
                     child: InkWell(
                       onTap: () async {
-                        dynamic result = await _auth.registerWithEmailPassword(email, password); // Corrected method name
+                        dynamic result = await _auth.registerWithEmailPassword(
+                          _email.text.trim(), 
+                          _password.text.trim(),
+                        );
 
                         if (result == null) {
                           setState(() {
                             error = "Could not register with those credentials.";
                           });
                         } else {
+                          final user = UsermodelSignup(
+                            uid: result.uid,
+                            email: _email.text.trim(),
+                            password: _password.text.trim(),
+                          );
+                          
+                          await _userRepo.createUser(user);
+
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => homeScreen(),
+                              builder: (context) => homeScreen(
+                                name: _email.text.trim(),  // Passing email to homeScreen
+                              ),
                             ),
-                            result: Navigator.of(context).push(MaterialPageRoute(builder: (context)=> settingScreen(email: _email.text),),),
                           );
                         }
                       },
-
                       child: const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 20),
                         child: Center(
                           child: Text(
                             "Create an Account",

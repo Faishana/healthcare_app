@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:healthcare_app/screen/appointmentScreen.dart';
-import 'package:healthcare_app/screen/doctor.dart';
 import 'package:healthcare_app/screen/homeScreen.dart';
 
 // ignore: camel_case_types
@@ -188,7 +185,7 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => homeScreen(),           
+                        builder: (context) => homeScreen(name: '',),           
                         ),
                     );
                   },
@@ -265,7 +262,6 @@ class _bookAppointmentScreenState extends State<bookAppointmentScreen> {
     );
 
     if (selectedTime != null) {
-      // Update the time controller with the selected time
       setState(() {
         _timeController.text = selectedTime.format(context);
       });

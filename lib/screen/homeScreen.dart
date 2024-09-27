@@ -14,6 +14,9 @@ void main() {
 }
 
 class homeScreen extends StatelessWidget {
+
+  final String name;
+
   final List<String> images = [
     "doctor1.jpg",
     "doctor2.jpg",
@@ -54,7 +57,7 @@ class homeScreen extends StatelessWidget {
     4.5,
   ];
 
-  homeScreen({super.key});
+  homeScreen({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -64,19 +67,19 @@ class homeScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Hello Alex",
-                    style: TextStyle(
-                      fontSize: 35,
+                    name,
+                    style: const TextStyle(
+                      fontSize: 25,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 25,
                     backgroundImage: AssetImage("images/heart.png"),
                   )
